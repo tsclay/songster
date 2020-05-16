@@ -5,7 +5,7 @@
 //==================================================
 
 // Link to help for Genius API: https://www.youtube.com/watch?v=-TgXQQQdzWY
-const query = 'Pink & Blue by Tycho'
+const query = 'Duality by Slipknot'
 const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 // const token2 =
 //   'glhXJYWphrHh8Xnoev9a8YKCm4hd78J16RXN-jF0p2YOkBAhTLcZLKp4l47isNNo'
@@ -31,7 +31,7 @@ $.ajax({
       }
     }).then(
       (song) => {
-        console.log(song)
+        // console.log(song)
         songLyrics = song.response.song.url
         $.ajax({
           url: `https://cors-anywhere.herokuapp.com/${songLyrics}`,
@@ -42,12 +42,15 @@ $.ajax({
         }).then(
           (data) => {
             // console.log('Lyrics data', data)
-            const lyrics = data.match(
-              /<div class="lyrics">\[ ([\d]*?) \]<\/div>/
-            )
-            console.log(lyrics)
+            // const $lyrics = $.parseHTML(data, null, false)
+            // console.log($lyrics.find($('routable-page')))
             // $(data).find()
-            // const $htmlData = $('<div class="lyrics">').html(data)
+            let $search = $(data).children().eq(6).text()
+            $search = $search.slice(
+              $search.indexOf('Duality Lyrics'),
+              $search.indexOf('More on Genius')
+            )
+            console.log($search)
             // console.log($htmlData.children())
           },
           (error) => {
