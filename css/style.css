@@ -3,7 +3,7 @@ body {
   height: 100%;
   margin: 10% auto;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1vw;
+  font-size: 1.5vw;
 }
 
 body > h1 {
@@ -11,7 +11,7 @@ body > h1 {
   display: block;
   margin: 1% 19%;
   padding: 2%;
-  width: 10%;
+  width: 20%;
 }
 
 form {
@@ -46,12 +46,16 @@ form > button {
   border: 1px solid black;
 }
 
+.general-search-result * {
+  border: 1px solid black;
+}
+
 .general-search-result {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
-  width: 90%;
-  margin: 5% 0 5% 0;
+  width: 65%;
+  margin: 5% auto;
   cursor: pointer;
 }
 
@@ -61,10 +65,18 @@ form > button {
 
 a {
   display: inline-block;
+  font-size: 2vw;
+  margin-left: 1%;
 }
 
 .album-art {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 50%;
+}
+
+.album-art img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
 }
