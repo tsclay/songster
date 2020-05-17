@@ -46,7 +46,24 @@ form > button {
 }
 
 .general-search-result {
-  display: block;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   width: 90%;
   margin: 5% 0 5% 0;
+  cursor: pointer;
+}
+
+.general-search-result:hover {
+  background-color: gray;
+}
+
+a {
+  display: inline-block;
+}
+
+.album-art {
+  display: block;
+  width: 100px;
+  height: 100px;
 }
