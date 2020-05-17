@@ -25,12 +25,11 @@ $('form').on('submit', (event) => {
 
       for (let i = 0; i < data.response.hits.length; i++) {
         const songID = data.response.hits[i].result.id
-        const shortTitle = data.response.hits[i].result.title
         const fullTitle = data.response.hits[i].result.full_title
         const hit = $('<div>')
           .addClass('general-search-result')
           .attr('song-id', `${songID}`)
-          .attr('song-name', `${shortTitle}`)
+          .attr('song-basic-info', `${fullTitle}`)
         const songAndArtist = $('<div class="genius-song-link">').text(
           fullTitle
         )
@@ -46,7 +45,7 @@ $('form').on('submit', (event) => {
       $('.general-search-result').on('click', (event) => {
         const songID = $(event.currentTarget).attr('song-id')
         console.log(songID)
-        const shortTitle = $(event.currentTarget).attr('song-name')
+        const lyricsHeader = $(event.currentTarget).attr('song-basic-info')
 
         $.ajax({
           url: `https://cors-anywhere.herokuapp.com/https://api.genius.com/songs/${songID}`,
@@ -98,7 +97,11 @@ $('form').on('submit', (event) => {
                   $search
                 )
                 $('.lyrics').append($contentLyrics)
-                console.log('raw data', $search)
+                $('.lyrics-body').prepend(
+                  $('<p class="song-title">').text(lyricsHeader)
+                )
+                $('a').removeAttr('href')
+                // console.log('raw data', $search)
               },
               (error) => {
                 console.log('Lyrics error', error)
