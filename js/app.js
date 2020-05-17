@@ -57,7 +57,7 @@ $('form').on('submit', (event) => {
           (song) => {
             console.log(song)
             songLyrics = song.response.song.url
-            const videoLink = song.response.song.media[0]
+            const audioLink = song.response.song.media[0]
             const albumArt = song.response.song.header_image_url
             console.log(songLyrics)
 
