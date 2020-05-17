@@ -23,8 +23,6 @@ $('form').on('submit', (event) => {
     (data) => {
       // Song title followed with artist and featured, if applies
 
-      console.log(data.response.hits[0].result)
-
       for (let i = 0; i < data.response.hits.length; i++) {
         const songID = data.response.hits[i].result.id
         const shortTitle = data.response.hits[i].result.title
@@ -70,12 +68,37 @@ $('form').on('submit', (event) => {
               }
             }).then(
               (lyrics) => {
-                let $search = $(lyrics).children().eq(6).text()
-                $search = $search.slice(
-                  $search.indexOf(`${shortTitle} Lyrics`),
-                  $search.indexOf('More on Genius')
+                // const test = $(lyrics).children().eq(6)
+                const $search = $(lyrics)
+                  .children()
+                  .eq(6)
+                  .contents()
+                  .eq(5)
+                  .contents()
+                  .eq(1)
+                  .contents()
+                  .eq(1)
+                  .contents()
+                  .eq(3)
+                  .contents()
+                  .eq(1)
+                  .children()
+                  .eq(0)
+                  .html()
+                // console.log(test2.html())
+                // let $search = $(lyrics).children().eq(6).html()
+
+                // $search = $search.slice(
+                //   $search.indexOf(`${shortTitle} Lyrics`),
+                //   $search.indexOf('More on Genius')
+                // )
+                $('.container').empty()
+                $('.container').addClass('lyrics')
+                const $contentLyrics = $('<div class="lyrics-body">').append(
+                  $search
                 )
-                console.log($search)
+                $('.lyrics').append($contentLyrics)
+                console.log('raw data', $search)
               },
               (error) => {
                 console.log('Lyrics error', error)
