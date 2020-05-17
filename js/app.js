@@ -10,6 +10,7 @@ const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 let songLyrics = ''
 
 $('form').on('submit', (event) => {
+  $('.container').removeClass().addClass('container')
   $('.container').empty()
   event.preventDefault()
   const query = $('input').val()
