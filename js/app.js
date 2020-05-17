@@ -28,10 +28,10 @@ $('form').on('submit', (event) => {
       for (let i = 0; i <= data.response.hits.length; i++) {
         songID = data.response.hits[i].result.id
         const title = data.response.hits[i].result.full_title
-        const hit = $('<div>').addClass('general-search-result')
-        const songAndArtist = $('<a class="genius-song-link">')
-          .text(title)
+        const hit = $('<div>')
+          .addClass('general-search-result')
           .attr('song-id', `${songID}`)
+        const songAndArtist = $('<a class="genius-song-link">').text(title)
         const albumArt = $('<img class="album-art">').attr(
           'src',
           data.response.hits[i].result.header_image_url
@@ -39,11 +39,16 @@ $('form').on('submit', (event) => {
         hit.append(songAndArtist).append(albumArt)
         $('.container').append(hit)
       }
+
+      $('img').on('click', (event) => {
+        console.log('hie there')
+      })
       // console.log(data.response.hits)
       // console.log(data.response.hits[0].result.full_title)
       // Song ID in Genius to ping the song directly for deeper info
 
       // Help for the 'settings' object preceding the then-callback is brought to me in part by RapidApi and their awesome code snippets (not sponsored)
+
       $.ajax({
         url: `https://cors-anywhere.herokuapp.com/https://api.genius.com/songs/${songID}`,
         crossDomain: true,
