@@ -21,7 +21,7 @@ form {
   justify-content: center;
   border: 1px solid purple;
   padding: 1%;
-  margin: 2% auto;
+  margin: 5% auto;
   width: 60%;
 }
 
@@ -40,11 +40,17 @@ form > button {
   color: rgb(255, 255, 255);
 }
 
-.container,
-.lyrics {
-  display: block;
+.container {
+  display: flex;
+  flex-flow: column nowrap;
   width: 100%;
   /* border: 1px solid black; */
+}
+
+.lyrics {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
 }
 
 /* .general-search-result * {
@@ -81,11 +87,10 @@ img {
   width: 55%;
 }
 
-.artist-info {
+.about-info {
+  width: 44%;
 }
 
-.lyrics-body {
-}
 .song-title {
   font-weight: bold;
   padding-bottom: 2%;
