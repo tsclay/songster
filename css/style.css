@@ -60,7 +60,7 @@ form > button {
 }
 
 .general-search-result:hover {
-  background-color: gray;
+  background-color: rgba(192, 192, 192, 0.548);
 }
 
 a {
@@ -69,14 +69,8 @@ a {
   margin-left: 1%;
 }
 
-.album-art {
+img {
   display: block;
-  width: 50%;
-}
-
-.album-art img {
-  display: block;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto;
+  width: 200px;
+  height: 200px;
 }

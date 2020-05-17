@@ -36,9 +36,11 @@ $('form').on('submit', (event) => {
         const songAndArtist = $('<div class="genius-song-link">').text(
           fullTitle
         )
-        const albumArt = $('<div class=album-art>').append(
-          $('<img>').attr('src', data.response.hits[i].result.header_image_url)
+        const albumArt = $('<img class=album-art>').attr(
+          'src',
+          data.response.hits[i].result.header_image_url
         )
+
         hit.append(songAndArtist).append(albumArt)
         $('.container').append(hit)
       }
