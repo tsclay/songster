@@ -76,3 +76,17 @@ img {
   width: 200px;
   height: 200px;
 }
+
+.lyrics-body {
+  width: 55%;
+}
+
+.artist-info {
+}
+
+.lyrics-body {
+}
+.song-title {
+  font-weight: bold;
+  padding-bottom: 2%;
+}
