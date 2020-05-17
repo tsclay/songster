@@ -40,15 +40,16 @@ form > button {
   color: rgb(255, 255, 255);
 }
 
-.container {
+.container,
+.lyrics {
   display: block;
   width: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
-.general-search-result * {
+/* .general-search-result * {
   border: 1px solid black;
-}
+} */
 
 .general-search-result {
   display: flex;
@@ -65,8 +66,9 @@ form > button {
 
 a {
   display: inline-block;
-  font-size: 2vw;
   margin-left: 1%;
+  text-decoration: none;
+  color: black;
 }
 
 img {
