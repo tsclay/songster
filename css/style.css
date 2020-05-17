@@ -9,7 +9,7 @@ body {
 body > h1 {
   background-color: antiquewhite;
   display: block;
-  margin: 1% 5%;
+  margin: 1% 19%;
   padding: 2%;
   width: 10%;
 }
@@ -21,7 +21,8 @@ form {
   justify-content: center;
   border: 1px solid purple;
   padding: 1%;
-  margin-bottom: 2%;
+  margin: 2% auto;
+  width: 60%;
 }
 
 form > input {
