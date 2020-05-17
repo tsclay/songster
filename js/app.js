@@ -55,8 +55,10 @@ $('form').on('submit', (event) => {
           }
         }).then(
           (song) => {
-            // console.log(song)
+            console.log(song)
             songLyrics = song.response.song.url
+            const videoLink = song.response.song.media[0]
+            const albumArt = song.response.song.header_image_url
             console.log(songLyrics)
 
             $.ajax({
@@ -68,7 +70,7 @@ $('form').on('submit', (event) => {
             }).then(
               (lyrics) => {
                 // const test = $(lyrics).children().eq(6)
-                const $search = $(lyrics)
+                const $lyricsContent = $(lyrics)
                   .children()
                   .eq(6)
                   .contents()
@@ -84,24 +86,39 @@ $('form').on('submit', (event) => {
                   .children()
                   .eq(0)
                   .html()
+                const $about = $(lyrics)
+                  .children()
+                  .eq(6)
+                  .contents()
+                  .eq(5)
+                  .contents()
+                  .eq(3)
+                  .contents()
+                  .eq(3)
+                  .html()
+                // console.log($about)
                 // console.log(test2.html())
-                // let $search = $(lyrics).children().eq(6).html()
+                // let $lyricsContent = $(lyrics).children().eq(6).html()
 
-                // $search = $search.slice(
-                //   $search.indexOf(`${shortTitle} Lyrics`),
-                //   $search.indexOf('More on Genius')
+                // $lyricsContent = $lyricsContent.slice(
+                //   $lyricsContent.indexOf(`${shortTitle} Lyrics`),
+                //   $lyricsContent.indexOf('More on Genius')
                 // )
                 $('.container').empty()
                 $('.container').addClass('lyrics')
-                const $contentLyrics = $('<div class="lyrics-body">').append(
-                  $search
+                const $lyricsContainer = $('<div class="lyrics-body">').append(
+                  $lyricsContent
                 )
-                $('.lyrics').append($contentLyrics)
+                $('.lyrics').append($lyricsContainer)
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
                 )
+                const aboutContainer = $('<div class="about-info">').append(
+                  $about
+                )
+                $('.lyrics').append(aboutContainer)
                 $('a').removeAttr('href')
-                // console.log('raw data', $search)
+                // console.log('raw data', $lyricsContent)
               },
               (error) => {
                 console.log('Lyrics error', error)
@@ -115,7 +132,7 @@ $('form').on('submit', (event) => {
       })
     },
     (error) => {
-      console.log('General search error', error)
+      console.log('General lyricsContent error', error)
     }
   )
 
