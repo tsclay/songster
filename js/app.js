@@ -33,10 +33,11 @@ $('form').on('submit', (event) => {
           .addClass('general-search-result')
           .attr('song-id', `${songID}`)
           .attr('song-name', `${shortTitle}`)
-        const songAndArtist = $('<a class="genius-song-link">').text(fullTitle)
-        const albumArt = $('<img class="album-art">').attr(
-          'src',
-          data.response.hits[i].result.header_image_url
+        const songAndArtist = $('<div class="genius-song-link">').text(
+          fullTitle
+        )
+        const albumArt = $('<div class=album-art>').append(
+          $('<img>').attr('src', data.response.hits[i].result.header_image_url)
         )
         hit.append(songAndArtist).append(albumArt)
         $('.container').append(hit)
