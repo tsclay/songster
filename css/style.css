@@ -30,9 +30,6 @@ form {
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  border: 1px solid purple;
-  /* padding: 1%; */
-  /* margin: 0 auto; */
   width: 70%;
 }
 
@@ -65,7 +62,6 @@ form > button {
   width: 100%;
   position: relative;
   padding: 50px;
-  /* border: 1px solid black; */
 }
 
 .lyrics {
@@ -73,10 +69,6 @@ form > button {
   flex-flow: row nowrap;
   width: 100%;
 }
-
-/* .general-search-result * {
-  border: 1px solid black;
-} */
 
 .general-search-result {
   display: flex;
@@ -92,7 +84,6 @@ form > button {
 }
 
 a {
-  /* display: inline-block; */
   text-decoration: none;
   color: whitesmoke;
 }
