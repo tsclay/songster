@@ -10,12 +10,8 @@ const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 let songLyrics = ''
 
 // https://1stwebdesigner.com/sticky-navigation-bar/
-$(window).on('scroll', () => {
-  const formPos = $('form').offset().top
-  console.log($(window).scrollTop())
-  // console.log('form'.offsetTop)
-  // console.log(form.offsetTop)
-})
+// console.log('form'.offsetTop)
+// console.log(form.offsetTop)
 
 $('form').on('submit', (event) => {
   $('.container').removeClass().addClass('container')
@@ -150,4 +146,16 @@ $('form').on('submit', (event) => {
   )
 
   // Help for the 'settings' object preceding the then-callback is brought to me in part by RapidApi and their awesome code snippets (not sponsored)
+})
+
+// Have search bar stick to top of window when scrolling down
+const formTopPos = $('form').offset().top
+$(window).scroll(() => {
+  const windowScrollPos = $(window).scrollTop()
+  console.log('window scroll top', windowScrollPos)
+  if (windowScrollPos >= formTopPos) {
+    $('form').addClass('sticky')
+  } else if (windowScrollPos < formTopPos) {
+    $('form').removeClass('sticky')
+  }
 })
