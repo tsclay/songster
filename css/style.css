@@ -1,7 +1,7 @@
 body {
   width: 90%;
   height: 100%;
-  margin: 10% auto;
+  margin: 0 auto;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5vw;
 }
@@ -15,6 +15,7 @@ body > h1 {
 }
 
 form {
+  background-color: white;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -40,10 +41,22 @@ form > button {
   color: rgb(255, 255, 255);
 }
 
+form.sticky {
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  left: 35px;
+  right: 35px;
+  z-index: 1;
+  margin: 0 auto;
+}
+
 .container {
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
+  position: relative;
+  padding: 50px;
   /* border: 1px solid black; */
 }
 
