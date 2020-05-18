@@ -152,10 +152,10 @@ $('form').on('submit', (event) => {
 const formTopPos = $('form').offset().top
 $(window).scroll(() => {
   const windowScrollPos = $(window).scrollTop()
-  console.log('window scroll top', windowScrollPos)
+  // console.log('window scroll top', windowScrollPos)
   if (windowScrollPos >= formTopPos) {
     $('form').addClass('sticky')
-  } else if (windowScrollPos < formTopPos) {
+  } else {
     $('form').removeClass('sticky')
   }
 })
