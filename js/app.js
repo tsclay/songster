@@ -9,6 +9,14 @@ const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 
 let songLyrics = ''
 
+// https://1stwebdesigner.com/sticky-navigation-bar/
+$(window).on('scroll', () => {
+  const formPos = $('form').offset().top
+  console.log($(window).scrollTop())
+  // console.log('form'.offsetTop)
+  // console.log(form.offsetTop)
+})
+
 $('form').on('submit', (event) => {
   $('.container').removeClass().addClass('container')
   $('.container').empty()
@@ -59,6 +67,7 @@ $('form').on('submit', (event) => {
             console.log(song)
             songLyrics = song.response.song.url
             const audioLink = song.response.song.media[0]
+            console.log(audioLink)
             const albumArt = song.response.song.header_image_url
             console.log(songLyrics)
 
@@ -114,11 +123,14 @@ $('form').on('submit', (event) => {
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
                 )
-                const aboutContainer = $('<div class="about-info">').append(
-                  $about
-                )
+                const aboutContainer = $('<div class="about-info">')
+                  .append($('<img>').attr('src', albumArt))
+                  .append($about)
                 $('.lyrics').append(aboutContainer)
                 $('a').removeAttr('href')
+                $('div[initial-content-for="album"]').empty()
+                $('div[initial-content-for="track_info').empty()
+                $('div[class="embedly_preview"]').empty()
                 // console.log('raw data', $lyricsContent)
               },
               (error) => {
