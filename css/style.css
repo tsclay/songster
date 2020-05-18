@@ -71,7 +71,7 @@ form > button {
 }
 
 a {
-  display: inline-block;
+  /* display: inline-block; */
   margin-left: 1%;
   text-decoration: none;
   color: black;
@@ -91,7 +91,21 @@ img {
   width: 44%;
 }
 
+.about-info img {
+  margin: 0 auto;
+}
+
 .song-title {
   font-weight: bold;
   padding-bottom: 2%;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+iframe {
+  width: 300px;
+  height: 300px;
 }
