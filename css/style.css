@@ -1,5 +1,5 @@
 body {
-  width: 90%;
+  width: 100%;
   min-height: 1000px;
   height: 100%;
   margin: 5% auto;
@@ -7,11 +7,18 @@ body {
   font-size: 1.5vw;
 }
 
-body > h1 {
+.search-bar {
+  background-color: antiquewhite;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+}
+
+.search-bar > h1 {
   background-color: antiquewhite;
   display: block;
-  margin: 1% 19%;
-  padding: 2%;
+  margin: 1% auto;
   width: 20%;
 }
 
@@ -42,7 +49,7 @@ form > button {
   color: rgb(255, 255, 255);
 }
 
-form.sticky {
+.search-bar.sticky {
   position: fixed;
   top: 0;
   overflow: hidden;
