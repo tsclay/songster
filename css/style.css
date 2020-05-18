@@ -27,17 +27,16 @@ body {
 
 .search-bar {
   background-color: mediumslateblue;
-  position: fixed;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: start;
   margin: 0 auto;
-  top: 5%;
 }
 
 .search-bar.sticky {
   position: fixed;
+  margin-bottom: 3%;
   top: 0;
   overflow: hidden;
   z-index: 1;
@@ -79,6 +78,7 @@ form > button {
   width: 100%;
   position: relative;
   padding: 50px;
+  margin-top: 5%;
 }
 
 .lyrics {
