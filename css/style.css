@@ -1,8 +1,16 @@
-body {
+html {
   width: 100%;
+  /* height: 100%; */
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100vw;
   min-height: 1000px;
   height: 100%;
-  margin: auto;
+  margin: 0 auto;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5vw;
   background: rgb(148, 152, 182);
@@ -14,15 +22,25 @@ body {
     rgba(66, 65, 71, 1) 100%
   );
   color: whitesmoke;
+  overflow-x: hidden;
 }
 
 .search-bar {
   background-color: mediumslateblue;
+  position: fixed;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: start;
-  margin-top: 3%;
+  margin: 0 auto;
+  top: 5%;
+}
+
+.search-bar.sticky {
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .search-bar > h1 {
@@ -37,7 +55,7 @@ form {
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 80%;
 }
 
 form > input {
@@ -53,14 +71,6 @@ form > button {
   border-radius: 10px;
   background-color: transparent;
   color: rgb(255, 255, 255);
-}
-
-.search-bar.sticky {
-  position: fixed;
-  top: 0;
-  overflow: hidden;
-  z-index: 1;
-  margin: 0 auto;
 }
 
 .container {
@@ -102,11 +112,11 @@ img {
 }
 
 .lyrics-body {
-  width: 55%;
+  width: 48%;
 }
 
 .about-info {
-  width: 44%;
+  width: 48%;
 }
 
 .about-info img {
