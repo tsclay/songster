@@ -149,13 +149,13 @@ $('form').on('submit', (event) => {
 })
 
 // Have search bar stick to top of window when scrolling down
-const formTopPos = $('form').offset().top
+const searchBar = $('.search-bar').offset().top
 $(window).scroll(() => {
   const windowScrollPos = $(window).scrollTop()
   // console.log('window scroll top', windowScrollPos)
-  if (windowScrollPos >= formTopPos) {
-    $('form').addClass('sticky')
+  if (windowScrollPos >= searchBar) {
+    $('.search-bar').addClass('sticky')
   } else {
-    $('form').removeClass('sticky')
+    $('.search-bar').removeClass('sticky')
   }
 })
