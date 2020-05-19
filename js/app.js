@@ -53,10 +53,12 @@ $('form').on('submit', (event) => {
       $('.general-search-result').on('click', (event) => {
         $('.container').empty()
         $('.container').addClass('lyrics')
+
         const $lyricsContainer = $('<div class="lyrics-body">')
         $('.lyrics').append($lyricsContainer)
-        const aboutContainer = $('<div class="about-info">')
-        $('.lyrics').append(aboutContainer)
+        const $aboutContainer = $('<div class="about-info">')
+        $('.lyrics').append($aboutContainer)
+
         const songID = $(event.currentTarget).attr('song-id')
         console.log(songID)
         const lyricsHeader = $(event.currentTarget).attr('song-basic-info')
@@ -156,10 +158,10 @@ $('form').on('submit', (event) => {
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
                 )
-                aboutContainer
+                $aboutContainer
                   .append($('<img>').attr('src', albumArt))
                   .append($about)
-                // $('.lyrics').append(aboutContainer)
+                // $('.lyrics').append($aboutContainer)
                 $('a').removeAttr('href')
                 $('div[initial-content-for="album"]').empty()
                 $('div[initial-content-for="track_info').empty()
