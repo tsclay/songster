@@ -163,7 +163,7 @@ $('form').on('submit', (event) => {
                 $('a').removeAttr('href')
                 $('div[initial-content-for="album"]').empty()
                 $('div[initial-content-for="track_info').empty()
-                $('div[class="embedly_preview"]').empty()
+                $('div[class="embedly_preview embedly_preview--video"]').empty()
                 // console.log($('.lyrics-body'))
                 // console.log('raw data', $lyricsContent)
               },
