@@ -82,6 +82,7 @@ $('form').on('submit', (event) => {
               }
             }
             audioLink = audioLink.replace('watch?v=', 'embed/')
+            audioLink = audioLink.replace('http', 'https')
             console.log('after embed insert', audioLink)
             const albumArt = song.response.song.header_image_url
             // console.log('the url to the lyrics:', songLyrics)
