@@ -140,7 +140,7 @@ iframe {
 }
 
 @media (max-width: 600px) {
-  .lyrics {
+  .container.lyrics {
     display: flex;
     flex-flow: column nowrap;
     justify-content: start;
