@@ -73,10 +73,18 @@ $('form').on('submit', (event) => {
           (song) => {
             console.log(song)
             songLyrics = song.response.song.url
-            const audioLink = song.response.song.media[0]
-            console.log(audioLink)
+            const mediaLinks = song.response.song.media
+            let audioLink
+            for (let i = 0; i < mediaLinks.length; i++) {
+              if (mediaLinks[i].provider === 'spotify') {
+                audioLink = mediaLinks[i].url
+                console.log('audio link to spotify track:', audioLink)
+              }
+            }
+            audioLink = audioLink.replace('track', 'embed/track')
+            console.log('after embed insert', audioLink)
             const albumArt = song.response.song.header_image_url
-            console.log('the url to the lyrics:', songLyrics)
+            // console.log('the url to the lyrics:', songLyrics)
 
             $.ajax({
               url: `https://cors-anywhere.herokuapp.com/${songLyrics}`,
@@ -157,6 +165,11 @@ $('form').on('submit', (event) => {
                 $lyricsContainer.append($lyricsContent)
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
+                )
+                $aboutContainer.append(
+                  $(
+                    '<iframe allowtransparency="true" allow="encrypted-media">'
+                  ).attr('src', `${audioLink}`)
                 )
                 $aboutContainer
                   .append($('<img>').attr('src', albumArt))
