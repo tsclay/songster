@@ -13,6 +13,9 @@ let songLyrics = ''
 // console.log('form'.offsetTop)
 // console.log(form.offsetTop)
 
+const viewWidth = $(window).width()
+console.log(viewWidth)
+
 $('form').on('submit', (event) => {
   $('.container').removeClass().addClass('container')
   $('.container').empty()
@@ -65,7 +68,7 @@ $('form').on('submit', (event) => {
             const audioLink = song.response.song.media[0]
             console.log(audioLink)
             const albumArt = song.response.song.header_image_url
-            console.log(songLyrics)
+            console.log('the url to the lyrics:', songLyrics)
 
             $.ajax({
               url: `https://cors-anywhere.herokuapp.com/${songLyrics}`,
@@ -76,22 +79,39 @@ $('form').on('submit', (event) => {
             }).then(
               (lyrics) => {
                 // const test = $(lyrics).children().eq(6)
-                const $lyricsContent = $(lyrics)
-                  .children()
-                  .eq(6)
-                  .contents()
-                  .eq(5)
-                  .contents()
-                  .eq(1)
-                  .contents()
-                  .eq(1)
-                  .contents()
-                  .eq(3)
-                  .contents()
-                  .eq(1)
-                  .children()
-                  .eq(0)
-                  .html()
+                // console.log('this should be the lyrics data:', lyrics)
+                // console.log('the jQuery obj for lyrics:', $(lyrics).children())
+                let $lyricsContent
+                if (viewWidth <= 800) {
+                  $lyricsContent = $(lyrics)
+                    .children()
+                    .eq(6)
+                    .contents()
+                    .eq(1)
+                    .contents()
+                    .eq(5)
+                    .html()
+                  console.log($lyricsContent)
+                } else {
+                  $lyricsContent = $(lyrics)
+                    .children()
+                    .eq(6)
+                    .contents()
+                    .eq(5)
+                    .contents()
+                    .eq(1)
+                    .contents()
+                    .eq(1)
+                    .contents()
+                    .eq(3)
+                    .contents()
+                    .eq(1)
+                    .children()
+                    .eq(0)
+                    .html()
+                }
+
+                // console.log($lyricsContent)
                 const $about = $(lyrics)
                   .children()
                   .eq(6)
@@ -127,6 +147,7 @@ $('form').on('submit', (event) => {
                 $('div[initial-content-for="album"]').empty()
                 $('div[initial-content-for="track_info').empty()
                 $('div[class="embedly_preview"]').empty()
+                // console.log($('.lyrics-body'))
                 // console.log('raw data', $lyricsContent)
               },
               (error) => {
