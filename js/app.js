@@ -76,12 +76,12 @@ $('form').on('submit', (event) => {
             const mediaLinks = song.response.song.media
             let audioLink
             for (let i = 0; i < mediaLinks.length; i++) {
-              if (mediaLinks[i].provider === 'spotify') {
+              if (mediaLinks[i].provider === 'youtube') {
                 audioLink = mediaLinks[i].url
-                console.log('audio link to spotify track:', audioLink)
+                console.log('link to youtube vid:', audioLink)
               }
             }
-            audioLink = audioLink.replace('track', 'embed/track')
+            audioLink = audioLink.replace('watch?v=', 'embed/')
             console.log('after embed insert', audioLink)
             const albumArt = song.response.song.header_image_url
             // console.log('the url to the lyrics:', songLyrics)
@@ -168,7 +168,7 @@ $('form').on('submit', (event) => {
                 )
                 $aboutContainer.append(
                   $(
-                    '<iframe allowtransparency="true" allow="encrypted-media">'
+                    '<iframe frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">'
                   ).attr('src', `${audioLink}`)
                 )
                 $aboutContainer
