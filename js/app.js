@@ -51,6 +51,12 @@ $('form').on('submit', (event) => {
       }
 
       $('.general-search-result').on('click', (event) => {
+        $('.container').empty()
+        $('.container').addClass('lyrics')
+        const $lyricsContainer = $('<div class="lyrics-body">')
+        $('.lyrics').append($lyricsContainer)
+        const aboutContainer = $('<div class="about-info">')
+        $('.lyrics').append(aboutContainer)
         const songID = $(event.currentTarget).attr('song-id')
         console.log(songID)
         const lyricsHeader = $(event.currentTarget).attr('song-basic-info')
@@ -82,6 +88,7 @@ $('form').on('submit', (event) => {
                 // console.log('this should be the lyrics data:', lyrics)
                 // console.log('the jQuery obj for lyrics:', $(lyrics).children())
                 let $lyricsContent
+                let $about
                 if (viewWidth <= 800) {
                   $lyricsContent = $(lyrics)
                     .children()
@@ -91,7 +98,14 @@ $('form').on('submit', (event) => {
                     .contents()
                     .eq(5)
                     .html()
-                  console.log($lyricsContent)
+                  $about = $(lyrics)
+                    .children()
+                    .eq(6)
+                    .contents()
+                    .eq(1)
+                    .contents()
+                    .eq(7)
+                    .html()
                 } else {
                   $lyricsContent = $(lyrics)
                     .children()
@@ -109,19 +123,21 @@ $('form').on('submit', (event) => {
                     .children()
                     .eq(0)
                     .html()
+
+                  $about = $(lyrics)
+                    .children()
+                    .eq(6)
+                    .contents()
+                    .eq(5)
+                    .contents()
+                    .eq(3)
+                    .contents()
+                    .eq(3)
+                    .html()
                 }
 
                 // console.log($lyricsContent)
-                const $about = $(lyrics)
-                  .children()
-                  .eq(6)
-                  .contents()
-                  .eq(5)
-                  .contents()
-                  .eq(3)
-                  .contents()
-                  .eq(3)
-                  .html()
+
                 // console.log($about)
                 // console.log(test2.html())
                 // let $lyricsContent = $(lyrics).children().eq(6).html()
@@ -130,19 +146,20 @@ $('form').on('submit', (event) => {
                 //   $lyricsContent.indexOf(`${shortTitle} Lyrics`),
                 //   $lyricsContent.indexOf('More on Genius')
                 // )
-                $('.container').empty()
-                $('.container').addClass('lyrics')
-                const $lyricsContainer = $('<div class="lyrics-body">').append(
-                  $lyricsContent
-                )
-                $('.lyrics').append($lyricsContainer)
+                // $('.container').empty()
+                // $('.container').addClass('lyrics')
+                // const $lyricsContainer = $('<div class="lyrics-body">').append(
+                //   $lyricsContent
+                // )
+                // $('.lyrics').append($lyricsContainer)
+                $lyricsContainer.append($lyricsContent)
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
                 )
-                const aboutContainer = $('<div class="about-info">')
+                aboutContainer
                   .append($('<img>').attr('src', albumArt))
                   .append($about)
-                $('.lyrics').append(aboutContainer)
+                // $('.lyrics').append(aboutContainer)
                 $('a').removeAttr('href')
                 $('div[initial-content-for="album"]').empty()
                 $('div[initial-content-for="track_info').empty()
