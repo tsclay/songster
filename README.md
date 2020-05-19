@@ -24,6 +24,12 @@ Learn more about the Genius API here:
 
 ---
 
+## Challenges
+
+
+
+---
+
 ## Resources
 
 Genius API demo and reference for syntax needed to work with API:
