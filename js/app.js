@@ -1,7 +1,7 @@
 //==================================================
 // Access Genius API for song data, then use the
-// song ID to fetch the song doc for that song to
-// get more exhaustive data
+// song ID to fetch the song lyrics and YouTube video
+// for the user
 //==================================================
 
 // Link to help for Genius API: https://www.youtube.com/watch?v=-TgXQQQdzWY
@@ -10,8 +10,6 @@ const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 let songLyrics = ''
 
 // https://1stwebdesigner.com/sticky-navigation-bar/
-// console.log('form'.offsetTop)
-// console.log(form.offsetTop)
 
 const viewWidth = $(window).width()
 console.log(viewWidth)
@@ -95,9 +93,6 @@ $('form').on('submit', (event) => {
               }
             }).then(
               (lyrics) => {
-                // const test = $(lyrics).children().eq(6)
-                // console.log('this should be the lyrics data:', lyrics)
-                // console.log('the jQuery obj for lyrics:', $(lyrics).children())
                 let $lyricsContent
                 let $about
                 if (viewWidth <= 800) {
@@ -147,22 +142,6 @@ $('form').on('submit', (event) => {
                     .html()
                 }
 
-                // console.log($lyricsContent)
-
-                // console.log($about)
-                // console.log(test2.html())
-                // let $lyricsContent = $(lyrics).children().eq(6).html()
-
-                // $lyricsContent = $lyricsContent.slice(
-                //   $lyricsContent.indexOf(`${shortTitle} Lyrics`),
-                //   $lyricsContent.indexOf('More on Genius')
-                // )
-                // $('.container').empty()
-                // $('.container').addClass('lyrics')
-                // const $lyricsContainer = $('<div class="lyrics-body">').append(
-                //   $lyricsContent
-                // )
-                // $('.lyrics').append($lyricsContainer)
                 $lyricsContainer.append($lyricsContent)
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
