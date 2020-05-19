@@ -77,13 +77,17 @@ form > button {
   flex-flow: column nowrap;
   width: 100%;
   position: relative;
-  margin: 8% 2%;
+  margin: 10% 2%;
 }
 
 .lyrics {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
+}
+
+.genius-song-link {
+  font-size: 3vw;
 }
 
 .general-search-result {
@@ -150,8 +154,61 @@ iframe {
     align-items: center;
   }
 
+  .general-search-result {
+    width: 100%;
+    margin-top: 2% auto;
+  }
+
+  .genius-song-link {
+    padding-left: 5%;
+  }
+
+  .search-bar {
+    background-color: mediumslateblue;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    margin: 0 auto;
+  }
+
+  .search-bar.sticky {
+    position: fixed;
+    margin-bottom: 3%;
+    top: 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 2em;
+  }
+
+  form > input {
+    font-size: 2em;
+  }
+
+  form > button {
+    font-size: 2em;
+  }
+
   iframe {
     width: 75%;
     height: 200px;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin-right: 8%;
   }
 }
