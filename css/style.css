@@ -134,6 +134,11 @@ ul {
   padding-left: 0;
 }
 
+iframe {
+  width: 100%;
+  height: 300px;
+}
+
 @media (max-width: 600px) {
   .container.lyrics {
     display: flex;
@@ -143,5 +148,10 @@ ul {
     position: relative;
     margin: 8% auto;
     align-items: center;
+  }
+
+  iframe {
+    width: 75%;
+    height: 200px;
   }
 }
