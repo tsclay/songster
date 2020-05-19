@@ -71,6 +71,7 @@ $('form').on('submit', (event) => {
           (song) => {
             console.log(song)
             songLyrics = song.response.song.url
+            console.log(songLyrics)
             const mediaLinks = song.response.song.media
             let audioLink
             for (let i = 0; i < mediaLinks.length; i++) {
