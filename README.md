@@ -27,9 +27,9 @@ However, researching the possibility reminded me that jQuery can take **any** HT
 
 ## Challenges
 
-### Speed, inconsistency, and clunky code
+### Locating lyrics was inconsistent
 
-Though this is just the first project, the speed of execution was a problem to me, seeing that no visual cue indicates that data is loading (something to add in a future deployment for sure). The following was in the code base:
+Here's what was in the code base:
 
 ```
 let $lyricsContent
@@ -82,7 +82,7 @@ if (viewWidth <= 800) {
 }
 ```
 
-Hard to follow right? It also is very inconsistent, and very slow. This next one is **much, much, more** efficient and quick:
+Hard to follow right? It was very inconsistent, and very slow. This next one is **much, much, more** efficient and quick (still slow, but quicker):
 
 ```
 $.ajax({
