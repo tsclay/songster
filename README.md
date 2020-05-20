@@ -1,7 +1,8 @@
 # Songster
+
 ---
 
-## What it does 
+## What it does
 
 Songster is an app that allows one to search for their favorite song and retreive its lyrics and an official, or "official", music video from YouTube.
 
@@ -26,14 +27,15 @@ Learn more about the Genius API here:
 
 ## Challenges
 
-
-
 ---
 
 ## Resources
 
 Genius API demo and reference for syntax needed to work with API:
 https://www.youtube.com/watch?v=-TgXQQQdzWY
+
+Debugging the web-scrape component:
+https://api.jquery.com/find/
 
 When YouTube videos don't play when embedded in the page:
 <https://stackoverflow.com/questions/51969269/embedded-youtube-video-doesnt-work-on-local-server>
