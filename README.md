@@ -1,5 +1,7 @@
 # Songster
 
+Hosted on Github Pages: <https://tsclay.github.io/songster.github.io>
+
 ---
 
 ## What it does
@@ -137,6 +139,27 @@ if (mediaLinks.length !== 0) {
 }
 
 ```
+
+---
+
+## Future iterations
+
+Improvements that can be made:
+
+- Display an elegant unavailable message if a YouTube video cannot be found
+- A loading icon?
+- Clean up `<div class="about-info">`
+  - What **_really_** needs to be shown here?
+- Implement local storage capability
+- Explore other styling options for responsiveness
+
+---
+
+## Tech used
+
+- HTML, CSS, JS
+- jQuery library (no UI)
+- <https://cors-anywhere.herokuapp.com> to avoid those pesky CORS errors
 
 ---
 
