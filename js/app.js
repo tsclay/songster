@@ -74,15 +74,26 @@ $('form').on('submit', (event) => {
             console.log(songLyrics)
             const mediaLinks = song.response.song.media
             let audioLink
-            for (let i = 0; i < mediaLinks.length; i++) {
-              if (mediaLinks[i].provider === 'youtube') {
-                audioLink = mediaLinks[i].url
-                console.log('link to youtube vid:', audioLink)
+            if (mediaLinks.length !== 0) {
+              for (let i = 0; i < mediaLinks.length; i++) {
+                if (mediaLinks[i].provider === 'youtube') {
+                  audioLink = mediaLinks[i].url
+                  console.log('link to youtube vid:', audioLink)
+                }
               }
+              audioLink = audioLink.replace('watch?v=', 'embed/')
+              audioLink = audioLink.replace('http', 'https')
+
+              console.log('after embed insert', audioLink)
+
+              $aboutContainer.append(
+                $(
+                  '<iframe frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">'
+                ).attr('src', `${audioLink}`)
+              )
+            } else {
+              console.log('this song does not have a youtube link')
             }
-            audioLink = audioLink.replace('watch?v=', 'embed/')
-            audioLink = audioLink.replace('http', 'https')
-            console.log('after embed insert', audioLink)
             const albumArt = song.response.song.header_image_url
             // console.log('the url to the lyrics:', songLyrics)
 
@@ -157,11 +168,6 @@ $('form').on('submit', (event) => {
                 $lyricsContainer.append($lyricsContent)
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
-                )
-                $aboutContainer.append(
-                  $(
-                    '<iframe frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">'
-                  ).attr('src', `${audioLink}`)
                 )
                 $aboutContainer
                   .append($('<img>').attr('src', albumArt))
