@@ -1,6 +1,6 @@
 # Songster
 
-Hosted on Github Pages: <https://tsclay.github.io/songster.github.io>
+Hosted on Github Pages: <https://songster.vercel.app>
 
 ---
 
