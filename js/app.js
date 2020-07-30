@@ -9,6 +9,9 @@ const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 
 let songLyrics = ''
 
+const loader =
+  "<div id='loading-wrapper'><img class='loading-spinner center-img' src='/img/loading.png' alt='Loading...' /></div>"
+
 const viewWidth = $(window).width()
 console.log(viewWidth)
 
@@ -16,9 +19,10 @@ $('form').on('submit', (event) => {
   event.preventDefault()
   $('.container').removeClass().addClass('container')
   $('.container').empty()
-  $(
-    "<img class='center-img' src='/img/loading.gif' alt='Loading...' />"
-  ).appendTo('.container')
+  // $(
+  //   "<img class='loading-spinner' src='/img/loading.gif' alt='Loading...' />"
+  // ).appendTo('.container')
+  $(loader).appendTo('.container')
   const query = $('input').val()
   console.log(query)
 
@@ -53,6 +57,7 @@ $('form').on('submit', (event) => {
       $('.general-search-result').on('click', (event) => {
         $('.container').empty()
         $('.container').addClass('lyrics')
+        $(loader).appendTo('.container')
 
         const $lyricsContainer = $('<div class="lyrics-body">')
         $('.lyrics').append($lyricsContainer)
@@ -118,6 +123,7 @@ $('form').on('submit', (event) => {
                   .find('div [initial-content-for="question_list"]')
                   .html()
 
+                $('#loading-wrapper').remove()
                 $lyricsContainer.append($lyricsContent)
                 $('.lyrics-body').prepend(
                   $('<p class="song-title">').text(lyricsHeader)
