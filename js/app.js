@@ -10,7 +10,7 @@ const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 let songLyrics = ''
 
 const loader =
-  "<div id='loading-wrapper'><img class='loading-spinner center-img' src='/img/loading.png' alt='Loading...' /></div>"
+  "<div id='loading-wrapper'><img class='loading-spinner center-img' src='../img/loading.png' alt='Loading...' /></div>"
 
 const viewWidth = $(window).width()
 console.log(viewWidth)
