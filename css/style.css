@@ -81,6 +81,11 @@ form > button {
   margin: 10% 2%;
 }
 
+.center-img {
+  display: block;
+  margin: 0 auto;
+}
+
 .lyrics {
   display: flex;
   flex-flow: row nowrap;

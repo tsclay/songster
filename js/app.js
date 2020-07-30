@@ -13,9 +13,12 @@ const viewWidth = $(window).width()
 console.log(viewWidth)
 
 $('form').on('submit', (event) => {
+  event.preventDefault()
   $('.container').removeClass().addClass('container')
   $('.container').empty()
-  event.preventDefault()
+  $(
+    "<img class='center-img' src='/img/loading.gif' alt='Loading...' />"
+  ).appendTo('.container')
   const query = $('input').val()
   console.log(query)
 
@@ -27,6 +30,7 @@ $('form').on('submit', (event) => {
     (data) => {
       // Song title followed with artist and featured, if applies
 
+      $('.container').empty()
       for (let i = 0; i < data.response.hits.length; i++) {
         const songID = data.response.hits[i].result.id
         const fullTitle = data.response.hits[i].result.full_title
