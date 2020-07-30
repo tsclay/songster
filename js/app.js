@@ -9,8 +9,6 @@ const token = 'OxYfGhNsuLpSKms2y3EW7jrnIY21V5Yg6GyrOthWokYbDI5k280rvP-KTpTbNwVq'
 
 let songLyrics = ''
 
-// https://1stwebdesigner.com/sticky-navigation-bar/
-
 const viewWidth = $(window).width()
 console.log(viewWidth)
 
@@ -148,16 +146,4 @@ $('form').on('submit', (event) => {
   )
 
   // Help for the 'settings' object preceding the then-callback is brought to me in part by RapidApi and their awesome code snippets (not sponsored)
-})
-
-// Have search bar stick to top of window when scrolling down
-const searchBar = $('.search-bar').offset().top
-$(window).scroll(() => {
-  const windowScrollPos = $(window).scrollTop()
-  // console.log('window scroll top', windowScrollPos)
-  if (windowScrollPos >= searchBar) {
-    $('.search-bar').addClass('sticky')
-  } else {
-    $('.search-bar').removeClass('sticky')
-  }
 })
