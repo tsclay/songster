@@ -1,17 +1,17 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
-export default function SearchBar(): JSX.Element {
-  const ref = useRef('');
+interface Props {
+  inputRef: React.MutableRefObject<string>;
+  handleSearch: () => void;
+}
 
-  const handleSearch = (): void => {
-    alert(ref.current);
-  };
-
+export const SearchBar: React.FC<Props> = (props) => {
+  const { inputRef, handleSearch } = props;
   return (
     <div>
       <input
         onChange={(e) => {
-          ref.current = e.target.value;
+          inputRef.current = e.target.value;
         }}
         type="text"
       />
@@ -20,4 +20,4 @@ export default function SearchBar(): JSX.Element {
       </button>
     </div>
   );
-}
+};

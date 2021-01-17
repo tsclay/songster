@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function SearchResults(): JSX.Element {
-  const [count, setCount] = useState(4);
+interface Props {
+  searchTerm: string | null;
+}
 
-  const increment = () => {
-    setCount(count + 1);
-  };
+export const SearchResults: React.FC<Props> = (props) => {
+  const { searchTerm } = props;
+  const [songs, setSongs] = useState([]);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const fetchSongData = async (query: string): Promise<any> => {
+        const token =
+          'Kk8yGYv93-tGb_--I0iwDhMDP8VAeGrv99MyWjk5KgepAlSGPCjTLbavINlIuyO1';
+        const url = `https://api.genius.com/search?access_token=${token}&q=${encodeURIComponent(
+          query
+        )}`;
+        const { response } = await fetch(url, {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            Accept: 'application/json',
+          },
+        }).then((r) => r.json());
+        const { hits } = response;
+        setSongs(hits);
+      };
+      fetchSongData(searchTerm);
+    }
+  }, [searchTerm]);
+
   return (
     <div>
       <p>This is the search results</p>
-      <p>Heres some state {count}</p>
-      <button type="button" onClick={increment}>
-        +
-      </button>
+      {/* <pre>{JSON.stringify(songs, null, 2)}</pre> */}
+      {songs.map((s) => (
+        <div></div>
+      ))}
     </div>
   );
-}
+};
