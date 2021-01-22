@@ -1,7 +1,7 @@
 import React from 'react';
-import { SearchResults } from './SearchResults';
+import { SearchResults } from '../SearchResults/SearchResults';
 import { RestMode } from '../RestMode/RestMode';
-import { Lyrics } from './Lyrics';
+import { Lyrics } from '../Lyrics/Lyrics';
 import { ContentAction } from '../../models/interfaces';
 
 import './ContentManager.scss';

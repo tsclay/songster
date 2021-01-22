@@ -1,7 +1,7 @@
 import React, { useReducer, useRef, useState } from 'react';
 import './App.scss';
 import { SearchBar } from '../Header/SearchBar';
-import { ContentManager } from '../Content/ContentManager';
+import { ContentManager } from '../ContentManager/ContentManager';
 import { ContentAction, ContentState } from '../../models/interfaces';
 
 const contentReducer = (

@@ -1,12 +1,13 @@
 .SearchResults {
   padding: 1rem;
   box-sizing: border-box;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  row-gap: 3rem;
+  column-gap: 3rem;
 
   .genius-result {
-    width: 50%;
+    align-self: center;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -23,7 +24,7 @@
       max-width: 300px;
     }
   }
-  .genius-result:not(:last-child) {
-    margin-bottom: 3rem;
-  }
+  // .genius-result:not(:last-child) {
+  //   margin-bottom: 3rem;
+  // }
 }
