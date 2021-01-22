@@ -44,7 +44,8 @@ export const App: React.FC = () => {
   );
   const [songs, setSongs] = useState([]);
 
-  const handleSearch = (): void => {
+  const handleSearch = (e: React.SyntheticEvent): void => {
+    e.preventDefault();
     dispatchContentReducer({
       type: 'SEARCHING',
       searchTerm: searchBarRef.current,
