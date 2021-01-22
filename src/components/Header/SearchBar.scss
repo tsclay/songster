@@ -1,0 +1,65 @@
+.SearchBar {
+  position: relative;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  height: 30px;
+
+  form {
+    display: none;
+  }
+
+  input,
+  button {
+    margin: 0;
+    box-shadow: none;
+  }
+
+  input:focus,
+  button:focus {
+    outline: none;
+  }
+
+  input,
+  button {
+    padding: 4px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: none;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    padding-right: 35px;
+  }
+
+  button {
+    width: 30px;
+    height: 100%;
+    position: absolute;
+    top: auto;
+    right: 0;
+  }
+
+  button:focus,
+  input:focus {
+    box-shadow: inset 0 0 0 1px rgb(104, 104, 104);
+  }
+
+  .input-underline {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 0px;
+    min-width: 0px;
+    margin-left: 4px;
+    border-top: 2px solid rgba(70, 70, 70, 0.7);
+    transition: all 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+
+  .input-underline.focused {
+    min-width: calc(100% - 35px - 4px);
+    transition: all 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+}
