@@ -1,0 +1,36 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #a0a0a0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1.logo-font-clamp {
+  font-size: clamp(1.5rem, 4vw, 5em);
+}
+
+h1.logo {
+  display: block;
+  text-transform: uppercase;
+  text-shadow: 4px 0px 0px rgb(196, 200, 252);
+  padding: 4px 6px;
+  box-sizing: border-box;
+  margin: 0;
+  border: 2px solid black;
+}

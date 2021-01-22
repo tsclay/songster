@@ -4,6 +4,8 @@ import { RestMode } from '../RestMode/RestMode';
 import { Lyrics } from './Lyrics';
 import { ContentAction } from '../../models/interfaces';
 
+import './ContentManager.scss';
+
 // interface Props extends ContentState
 interface Props {
   contentState: {

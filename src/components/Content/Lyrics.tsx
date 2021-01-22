@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { ContentAction } from '../../models/interfaces';
 
+import './Lyrics.scss';
+
 interface Props {
   url: string | null;
   prevSearchTerm: string | null;
@@ -33,10 +35,15 @@ export const Lyrics: React.FC<Props> = (props) => {
   const parseHTMLString = (string: string): void => {
     if (!string) return;
     const template = document.createElement('template');
-    template.innerHTML = string.trim();
-    const foundLyrics = template.content.querySelector('.lyrics')?.textContent;
-    const foundInfo = template.content.querySelector('div.rich_text_formatting')
-      ?.textContent;
+    template.innerHTML = string;
+    const foundLyrics = template.content
+      .querySelector('.lyrics')
+      ?.textContent?.trimEnd()
+      .trimLeft();
+    const foundInfo = template.content
+      .querySelector('div.rich_text_formatting')
+      ?.textContent?.trimEnd()
+      .trimLeft();
     lyricContent.current = foundLyrics || '';
     aboutContent.current = foundInfo || '';
   };
@@ -54,8 +61,9 @@ export const Lyrics: React.FC<Props> = (props) => {
   }, [url, fetchLyrics]);
 
   return (
-    <div>
+    <div className="Lyrics">
       <button
+        className="return-btn"
         onClick={(e) => {
           contentReducer({
             type: 'SEARCHING',
@@ -64,13 +72,19 @@ export const Lyrics: React.FC<Props> = (props) => {
           });
         }}
       >
-        Return
+        ⬅
       </button>
       <p>What up lyrics</p>
       {gotLyrics ? (
         <>
-          <div dangerouslySetInnerHTML={makeMarkup(lyricContent.current)}></div>
-          <div dangerouslySetInnerHTML={makeMarkup(aboutContent.current)}></div>
+          <div
+            className="song-lyrics"
+            dangerouslySetInnerHTML={makeMarkup(lyricContent.current)}
+          ></div>
+          <div
+            className="song-about"
+            dangerouslySetInnerHTML={makeMarkup(aboutContent.current)}
+          ></div>
         </>
       ) : (
         <h2>Waiting...</h2>

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { ContentAction } from '../../models/interfaces';
 
+import './SearchResults.scss';
+
 interface Props {
   searchTerm: string | null;
   contentReducer: React.Dispatch<ContentAction>;
@@ -14,15 +16,15 @@ export const SearchResults: React.FC<Props> = (props) => {
   const { searchTerm, contentReducer, rememberSongs, songs } = props;
   // const [songs, setSongs] = useState([]);
 
-  const callDispatchOp = (e: React.SyntheticEvent<HTMLDivElement>) => {
-    if (!(e.target instanceof HTMLDivElement)) {
+  const callDispatchOp = (e: React.SyntheticEvent) => {
+    if (!(e.currentTarget instanceof HTMLDivElement)) {
       return;
     }
-    console.log(e.target.dataset.url);
+    console.log(e.currentTarget.dataset.url);
     contentReducer({
       type: 'LYRICS',
       searchTerm: null,
-      urlToLyrics: e.target.dataset.url!,
+      urlToLyrics: e.currentTarget.dataset.url!,
     });
   };
 
@@ -42,6 +44,7 @@ export const SearchResults: React.FC<Props> = (props) => {
           },
         }).then((r) => r.json());
         const { hits } = response;
+        console.log(hits);
         rememberSongs(hits);
       };
       console.log('running fetchGenius');
@@ -50,16 +53,20 @@ export const SearchResults: React.FC<Props> = (props) => {
   }, [searchTerm, rememberSongs]);
 
   return (
-    <div>
-      <p>This is the search results</p>
+    <div className="SearchResults">
       {songs.map((s: any) => (
-        <div key={s.result.id} data-url={s.result.url} onClick={callDispatchOp}>
+        <div
+          className="genius-result"
+          key={s.result.id}
+          data-url={s.result.url}
+          onClick={callDispatchOp}
+        >
           <img
             src={s.result.header_image_thumbnail_url}
             alt={s.result.title_with_featured}
           />
           <h3>{s.result.title_with_featured}</h3>
-          <p>{s.result.name}</p>
+          <p>{s.result.primary_artist.name}</p>
         </div>
       ))}
     </div>

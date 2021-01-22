@@ -1,8 +1,5 @@
-.App {
-  text-align: center;
-}
-
 .Header {
+  height: 65px;
   position: sticky;
   display: flex;
   justify-content: space-between;
@@ -10,4 +7,8 @@
   padding: 0 0.5rem;
   box-sizing: border-box;
   background: #c86fff;
+}
+
+.Content {
+  height: calc(100% - 65px);
 }

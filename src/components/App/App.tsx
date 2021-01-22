@@ -1,5 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react';
-import './App.css';
+import './App.scss';
 import { SearchBar } from '../Header/SearchBar';
 import { ContentManager } from '../Content/ContentManager';
 import { ContentAction, ContentState } from '../../models/interfaces';
@@ -54,9 +54,9 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <>
       <nav className="Header">
-        <h1>Songster</h1>
+        <h1 className="logo logo-font-clamp">Songster</h1>
         <SearchBar inputRef={searchBarRef} handleSearch={handleSearch} />
       </nav>
       <div className="Content">
@@ -67,6 +67,6 @@ export const App: React.FC = () => {
           contentReducer={dispatchContentReducer}
         />
       </div>
-    </div>
+    </>
   );
 };
