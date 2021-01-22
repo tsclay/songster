@@ -1,18 +1,8 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useState } from 'react';
 import './App.css';
 import { SearchBar } from '../Header/SearchBar';
 import { ContentManager } from '../Content/ContentManager';
-
-interface ContentAction {
-  type: string;
-  searchTerm: string | null;
-}
-
-interface ContentState {
-  index: number;
-  mode: 'SEARCHING' | 'LYRICS' | 'REST';
-  searchTerm: string | null;
-}
+import { ContentAction, ContentState } from '../../models/interfaces';
 
 const contentReducer = (
   state: ContentState,
@@ -21,38 +11,45 @@ const contentReducer = (
   switch (action.type) {
     case 'SEARCHING':
       return {
-        index: 1,
         mode: 'SEARCHING',
         searchTerm: action.searchTerm,
+        urlToLyrics: null,
       };
     case 'LYRICS':
       return {
-        index: 2,
         mode: 'LYRICS',
         searchTerm: null,
+        urlToLyrics: action.urlToLyrics,
       };
     default:
       return {
-        index: 0,
         mode: 'REST',
         searchTerm: null,
+        urlToLyrics: null,
       };
   }
 };
 
 const initialState: ContentState = {
-  index: 0,
   mode: 'REST',
   searchTerm: null,
+  urlToLyrics: null,
 };
 
 export const App: React.FC = () => {
   const searchBarRef = useRef('');
-  const [contentConfig, dispatch] = useReducer(contentReducer, initialState);
+  const [contentConfig, dispatchContentReducer] = useReducer(
+    contentReducer,
+    initialState
+  );
+  const [songs, setSongs] = useState([]);
 
   const handleSearch = (): void => {
-    dispatch({ type: 'SEARCHING', searchTerm: searchBarRef.current });
-    // alert(searchBarRef.current);
+    dispatchContentReducer({
+      type: 'SEARCHING',
+      searchTerm: searchBarRef.current,
+      urlToLyrics: null,
+    });
   };
 
   return (
@@ -62,7 +59,12 @@ export const App: React.FC = () => {
         <SearchBar inputRef={searchBarRef} handleSearch={handleSearch} />
       </nav>
       <div className="Content">
-        <ContentManager contentState={contentConfig} />
+        <ContentManager
+          songs={songs}
+          rememberSongs={setSongs}
+          contentState={contentConfig}
+          contentReducer={dispatchContentReducer}
+        />
       </div>
     </div>
   );
