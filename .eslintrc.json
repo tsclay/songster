@@ -2,8 +2,7 @@
   "extends": [
     "react-app",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "prettier:prettier/recommended"
+    "prettier/@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["react-hooks", "@typescript-eslint", "prettier"],
