@@ -9,8 +9,6 @@ interface Props {
   contentReducer: React.Dispatch<ContentAction>;
 }
 
-const corsProxy: string = process.env.CORS_PROXY ?? 'http://0.0.0.0:7000';
-
 export const Lyrics: React.FC<Props> = (props) => {
   const { url, contentReducer, prevSearchTerm } = props;
   const [gotLyrics, setGotLyrics] = useState(false);
@@ -19,7 +17,7 @@ export const Lyrics: React.FC<Props> = (props) => {
   const fetchLyrics = useCallback(async (url: string | null): Promise<any> => {
     if (!url) return;
     // console.log(url);
-    const response = await fetch(`${corsProxy}/${url}`, {
+    const response = await fetch(`https://songster-cors.herokuapp.com/${url}`, {
       method: 'GET',
       mode: 'cors',
       headers: {
