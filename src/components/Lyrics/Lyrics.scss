@@ -2,16 +2,22 @@
   padding: 1rem;
   box-sizing: border-box;
   position: relative;
+
+  .dynamic-font-size {
+    line-height: clamp(1.5rem, 2vw, 3em);
+    font-size: clamp(16px, 2vw, 3em);
+  }
+
   .song-lyrics {
     white-space: pre-wrap;
     margin-bottom: 3rem;
-    line-height: clamp(1.5rem, 2vw, 5em);
-    font-size: clamp(16px, 2vw, 5em);
   }
-  .return-btn {
+  .user-options {
     position: fixed;
     top: 70px;
     right: 1rem;
+  }
+  .return-btn {
     border-radius: 30px;
     border: none;
     height: 40px;
