@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { ContentAction } from '../../models/interfaces';
 
 import './SearchResults.scss';
@@ -28,47 +28,55 @@ export const SearchResults: React.FC<Props> = (props) => {
     });
   };
 
+  const fetchGenius = useCallback(
+    async (query: string): Promise<any> => {
+      const token =
+        'Kk8yGYv93-tGb_--I0iwDhMDP8VAeGrv99MyWjk5KgepAlSGPCjTLbavINlIuyO1';
+      const url = `https://api.genius.com/search?access_token=${token}&q=${encodeURIComponent(
+        query
+      )}`;
+      const { response } = await fetch(url, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+        },
+      }).then((r) => r.json());
+      const { hits } = response;
+      console.log(hits);
+      rememberSongs(hits);
+    },
+    [rememberSongs]
+  );
+
   useEffect(() => {
     if (searchTerm) {
-      const fetchGenius = async (query: string): Promise<any> => {
-        const token =
-          'Kk8yGYv93-tGb_--I0iwDhMDP8VAeGrv99MyWjk5KgepAlSGPCjTLbavINlIuyO1';
-        const url = `https://api.genius.com/search?access_token=${token}&q=${encodeURIComponent(
-          query
-        )}`;
-        const { response } = await fetch(url, {
-          method: 'GET',
-          mode: 'cors',
-          headers: {
-            Accept: 'application/json',
-          },
-        }).then((r) => r.json());
-        const { hits } = response;
-        console.log(hits);
-        rememberSongs(hits);
-      };
       console.log('running fetchGenius');
       fetchGenius(searchTerm);
     }
-  }, [searchTerm, rememberSongs]);
+  }, [searchTerm, rememberSongs, fetchGenius]);
 
   return (
     <div className="SearchResults">
-      {songs.map((s: any) => (
-        <div
-          className="genius-result"
-          key={s.result.id}
-          data-url={s.result.url}
-          onClick={callDispatchOp}
-        >
-          <img
-            src={s.result.header_image_thumbnail_url}
-            alt={s.result.title_with_featured}
-          />
-          <h3>{s.result.title_with_featured}</h3>
-          <p>{s.result.primary_artist.name}</p>
-        </div>
-      ))}
+      {songs.length > 0 ? (
+        songs.map((s: any) => (
+          <div
+            className="genius-result"
+            key={s.result.id}
+            data-url={s.result.url}
+            onClick={callDispatchOp}
+          >
+            <img
+              src={s.result.header_image_thumbnail_url}
+              alt={s.result.title_with_featured}
+            />
+            <h3>{s.result.title_with_featured}</h3>
+            <p>{s.result.primary_artist.name}</p>
+          </div>
+        ))
+      ) : (
+        <h1>Waiting...</h1>
+      )}
     </div>
   );
 };
