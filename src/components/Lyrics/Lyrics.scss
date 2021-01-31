@@ -4,13 +4,17 @@
   position: relative;
 
   .dynamic-font-size {
-    line-height: clamp(1.5rem, 2vw, 3em);
-    font-size: clamp(16px, 2vw, 3em);
+    line-height: clamp(1.5rem, 2vw, 1.5em);
+    font-size: clamp(16px, 2vw, 1.5em);
   }
 
   .song-lyrics {
     white-space: pre-wrap;
     margin-bottom: 3rem;
+  }
+
+  .song-lyrics.sml-width {
+    width: 45%;
   }
 
   .song-info {
@@ -20,15 +24,23 @@
     transform: translate(100%, 0);
     transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
     background: #ffffffbd;
-    width: 50%;
+    width: 55%;
     height: $lyricWindowHeight;
-    padding: 4rem;
+    padding: 1.15rem;
     box-sizing: border-box;
     overflow: auto;
 
     img {
       width: 100%;
       height: 300px;
+    }
+
+    div.embedly_preview--video {
+      width: 100%;
+
+      iframe {
+        width: 100%;
+      }
     }
   }
 
