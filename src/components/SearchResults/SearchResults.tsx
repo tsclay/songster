@@ -24,7 +24,10 @@ export const SearchResults: React.FC<Props> = (props) => {
     contentReducer({
       type: 'LYRICS',
       searchTerm: null,
-      urlToLyrics: e.currentTarget.dataset.url!,
+      urls: {
+        lyrics: e.currentTarget.dataset.url!,
+        songData: e.currentTarget.dataset.apiPath!
+      }
     });
   };
 
@@ -39,8 +42,8 @@ export const SearchResults: React.FC<Props> = (props) => {
         method: 'GET',
         mode: 'cors',
         headers: {
-          Accept: 'application/json',
-        },
+          Accept: 'application/json'
+        }
       }).then((r) => r.json());
       const { hits } = response;
       console.log(hits);
@@ -64,6 +67,7 @@ export const SearchResults: React.FC<Props> = (props) => {
             className="genius-result"
             key={s.result.id}
             data-url={s.result.url}
+            data-api-path={s.result.api_path}
             onClick={callDispatchOp}
           >
             <img

@@ -4,7 +4,7 @@
   position: relative;
 
   .dynamic-font-size {
-    line-height: clamp(1.5rem, 2vw, 1.5em);
+    line-height: 1.5em;
     font-size: clamp(16px, 2vw, 1.5em);
   }
 
@@ -14,7 +14,7 @@
   }
 
   .song-lyrics.sml-width {
-    width: 45%;
+    width: 55%;
   }
 
   .song-info {
@@ -24,7 +24,7 @@
     transform: translate(100%, 0);
     transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
     background: #ffffffbd;
-    width: 55%;
+    width: 45%;
     height: $lyricWindowHeight;
     padding: 1.15rem;
     box-sizing: border-box;

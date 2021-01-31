@@ -11,7 +11,10 @@ interface Props {
   contentState: {
     mode: 'SEARCHING' | 'LYRICS' | 'REST';
     searchTerm: string | null;
-    urlToLyrics: string | null;
+    urls: {
+      lyrics: string | null;
+      songData: string | null;
+    };
   };
   contentReducer: React.Dispatch<ContentAction>;
   rememberSongs: React.Dispatch<React.SetStateAction<never[]>>;
@@ -36,7 +39,8 @@ export const ContentManager: React.FC<Props> = (props) => {
       return (
         <Lyrics
           prevSearchTerm={contentState.searchTerm}
-          url={contentState.urlToLyrics}
+          url={contentState.urls.lyrics}
+          apiPath={contentState.urls.songData}
           contentReducer={contentReducer}
         />
       );

@@ -5,37 +5,41 @@ import './Lyrics.scss';
 
 interface Props {
   url: string | null;
+  apiPath: string | null;
   prevSearchTerm: string | null;
   contentReducer: React.Dispatch<ContentAction>;
 }
 
 export const Lyrics: React.FC<Props> = (props) => {
-  const { url, contentReducer, prevSearchTerm } = props;
+  const { url, contentReducer, prevSearchTerm, apiPath } = props;
   const [gotLyrics, setGotLyrics] = useState(false);
-  // const [songMetadata, setSongMetadata] = useState(null);
+  const [songMetadata, setSongMetadata] = useState(null);
   const lyricContent = useRef('');
   const aboutContent = useRef('');
   const theseLyrics = useRef<null | HTMLDivElement>(null);
   const infoDiv = useRef<null | HTMLDivElement>(null);
 
-  // const fetchSongData = useCallback(
-  //   async (url: string | null): Promise<any> => {
-  //     if (!url) return;
-  //     const response = await fetch(url, {
-  //       method: 'GET',
-  //       mode: 'cors',
-  //       headers: {
-  //         Accept: 'application/json'
-  //       }
-  //     });
-  //     if (response) {
-  //       const data = await response.json();
-  //       console.log(data);
-  //       setSongMetadata(data);
-  //     }
-  //   },
-  //   []
-  // );
+  const fetchSongData = useCallback(
+    async (url: string | null): Promise<any> => {
+      if (!url) return;
+      const token =
+        'Kk8yGYv93-tGb_--I0iwDhMDP8VAeGrv99MyWjk5KgepAlSGPCjTLbavINlIuyO1';
+      const fullPath = `https://api.genius.com${url}/?access_token=${token}`;
+      const response = await fetch(fullPath, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+      if (response) {
+        const data = await response.json();
+        console.log(data);
+        setSongMetadata(data);
+      }
+    },
+    []
+  );
 
   const fetchLyrics = useCallback(async (url: string | null): Promise<any> => {
     if (!url) return;
@@ -45,8 +49,8 @@ export const Lyrics: React.FC<Props> = (props) => {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
-      },
+        Accept: 'application/json'
+      }
     });
     // console.log(response);
     if (response) {
@@ -75,7 +79,7 @@ export const Lyrics: React.FC<Props> = (props) => {
   const makeMarkup = (htmlString: string): { __html: string } | undefined => {
     return htmlString
       ? {
-          __html: htmlString,
+          __html: htmlString
         }
       : undefined;
   };
@@ -84,9 +88,9 @@ export const Lyrics: React.FC<Props> = (props) => {
     fetchLyrics(url);
   }, [url, fetchLyrics]);
 
-  // useEffect(() => {
-  //   fetchSongData(null);
-  // }, [fetchSongData]);
+  useEffect(() => {
+    fetchSongData(apiPath);
+  }, [fetchSongData, apiPath]);
 
   return (
     <div className="Lyrics">
@@ -98,7 +102,10 @@ export const Lyrics: React.FC<Props> = (props) => {
             contentReducer({
               type: 'SEARCHING',
               searchTerm: prevSearchTerm,
-              urlToLyrics: null,
+              urls: {
+                lyrics: null,
+                songData: null
+              }
             });
           }}
         >
@@ -119,7 +126,7 @@ export const Lyrics: React.FC<Props> = (props) => {
           <button type="button">video</button>
         </div>
       </div>
-      {gotLyrics ? (
+      {gotLyrics && songMetadata ? (
         <div className="lyrics-body">
           <p>This song</p>
           <div
@@ -132,7 +139,7 @@ export const Lyrics: React.FC<Props> = (props) => {
             className="song-info dynamic-font-size"
             dangerouslySetInnerHTML={makeMarkup(aboutContent.current)}
           ></div>
-          {/* <div>{JSON.stringify(songMetadata)}</div> */}
+          <div>{JSON.stringify(songMetadata)}</div>
         </div>
       ) : (
         <h2>Waiting...</h2>

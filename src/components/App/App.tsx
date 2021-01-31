@@ -13,19 +13,28 @@ const contentReducer = (
       return {
         mode: 'SEARCHING',
         searchTerm: action.searchTerm,
-        urlToLyrics: null,
+        urls: {
+          lyrics: null,
+          songData: null
+        }
       };
     case 'LYRICS':
       return {
         mode: 'LYRICS',
         searchTerm: null,
-        urlToLyrics: action.urlToLyrics,
+        urls: {
+          lyrics: action.urls.lyrics,
+          songData: action.urls.songData
+        }
       };
     default:
       return {
         mode: 'REST',
         searchTerm: null,
-        urlToLyrics: null,
+        urls: {
+          lyrics: null,
+          songData: null
+        }
       };
   }
 };
@@ -33,7 +42,10 @@ const contentReducer = (
 const initialState: ContentState = {
   mode: 'REST',
   searchTerm: null,
-  urlToLyrics: null,
+  urls: {
+    lyrics: null,
+    songData: null
+  }
 };
 
 export const App: React.FC = () => {
@@ -49,7 +61,10 @@ export const App: React.FC = () => {
     dispatchContentReducer({
       type: 'SEARCHING',
       searchTerm: searchBarRef.current,
-      urlToLyrics: null,
+      urls: {
+        lyrics: null,
+        songData: null
+      }
     });
   };
 
