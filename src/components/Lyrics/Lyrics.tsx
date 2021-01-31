@@ -15,6 +15,7 @@ export const Lyrics: React.FC<Props> = (props) => {
   // const [songMetadata, setSongMetadata] = useState(null);
   const lyricContent = useRef('');
   const aboutContent = useRef('');
+  const theseLyrics = useRef<null | HTMLDivElement>(null);
   const infoDiv = useRef<null | HTMLDivElement>(null);
 
   // const fetchSongData = useCallback(
@@ -110,6 +111,7 @@ export const Lyrics: React.FC<Props> = (props) => {
             type="button"
             onClick={(e) => {
               infoDiv.current?.classList.toggle('show');
+              theseLyrics.current?.classList.toggle('sml-width');
             }}
           >
             info
@@ -121,6 +123,7 @@ export const Lyrics: React.FC<Props> = (props) => {
         <div className="lyrics-body">
           <p>This song</p>
           <div
+            ref={theseLyrics}
             className="song-lyrics dynamic-font-size"
             dangerouslySetInnerHTML={makeMarkup(lyricContent.current)}
           ></div>
