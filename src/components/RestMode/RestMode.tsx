@@ -7,7 +7,7 @@ export const RestMode: React.FC = () => {
     <div className="RestMode">
       <div className="ctr-blurb">
         <h1>
-          Welcome to <h1 className="logo small">Songster</h1>
+          Welcome to <span className="logo small">Songster</span>
         </h1>
         <p>
           Get started by searching for your favorite album, artist, or song!
