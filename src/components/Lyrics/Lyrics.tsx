@@ -1,19 +1,12 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { ContentAction } from '../../models/interfaces';
+import { SongData, LyricsProps } from '../../models/interfaces';
 
 import './Lyrics.scss';
 
-interface Props {
-  url: string | null;
-  apiPath: string | null;
-  prevSearchTerm: string | null;
-  contentReducer: React.Dispatch<ContentAction>;
-}
-
-export const Lyrics: React.FC<Props> = (props) => {
+export const Lyrics: React.FC<LyricsProps> = (props) => {
   const { url, contentReducer, prevSearchTerm, apiPath } = props;
   const [gotLyrics, setGotLyrics] = useState(false);
-  const [songMetadata, setSongMetadata] = useState(null);
+  const [songMetadata, setSongMetadata] = useState<SongData | null>(null);
   const lyricContent = useRef('');
   const aboutContent = useRef('');
   const theseLyrics = useRef<null | HTMLDivElement>(null);
@@ -29,8 +22,8 @@ export const Lyrics: React.FC<Props> = (props) => {
         method: 'GET',
         mode: 'cors',
         headers: {
-          Accept: 'application/json'
-        }
+          Accept: 'application/json',
+        },
       });
       if (response) {
         const data = await response.json();
@@ -49,8 +42,8 @@ export const Lyrics: React.FC<Props> = (props) => {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     });
     // console.log(response);
     if (response) {
@@ -79,7 +72,7 @@ export const Lyrics: React.FC<Props> = (props) => {
   const makeMarkup = (htmlString: string): { __html: string } | undefined => {
     return htmlString
       ? {
-          __html: htmlString
+          __html: htmlString,
         }
       : undefined;
   };
@@ -104,8 +97,8 @@ export const Lyrics: React.FC<Props> = (props) => {
               searchTerm: prevSearchTerm,
               urls: {
                 lyrics: null,
-                songData: null
-              }
+                songData: null,
+              },
             });
           }}
         >
@@ -128,7 +121,7 @@ export const Lyrics: React.FC<Props> = (props) => {
       </div>
       {gotLyrics && songMetadata ? (
         <div className="lyrics-body">
-          <p>This song</p>
+          <p>{songMetadata?.response.song.full_title}</p>
           <div
             ref={theseLyrics}
             className="song-lyrics dynamic-font-size"
@@ -139,7 +132,6 @@ export const Lyrics: React.FC<Props> = (props) => {
             className="song-info dynamic-font-size"
             dangerouslySetInnerHTML={makeMarkup(aboutContent.current)}
           ></div>
-          <div>{JSON.stringify(songMetadata)}</div>
         </div>
       ) : (
         <h2>Waiting...</h2>
@@ -147,5 +139,3 @@ export const Lyrics: React.FC<Props> = (props) => {
     </div>
   );
 };
-
-// testing
