@@ -26,8 +26,8 @@ export const SearchResults: React.FC<Props> = (props) => {
       searchTerm: null,
       urls: {
         lyrics: e.currentTarget.dataset.url!,
-        songData: e.currentTarget.dataset.apiPath!
-      }
+        songData: e.currentTarget.dataset.apiPath!,
+      },
     });
   };
 
@@ -42,8 +42,8 @@ export const SearchResults: React.FC<Props> = (props) => {
         method: 'GET',
         mode: 'cors',
         headers: {
-          Accept: 'application/json'
-        }
+          Accept: 'application/json',
+        },
       }).then((r) => r.json());
       const { hits } = response;
       console.log(hits);
