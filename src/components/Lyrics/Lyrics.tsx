@@ -24,14 +24,21 @@ const stylizeText = (text: string | undefined): string | undefined => {
   let resultText = '';
   console.log('input', text);
   const regEx = new RegExp(/\[.+/, 'g');
-  const allMatches: string[] | null = text.match(regEx);
+  const allMatches: string[] = [...new Set(text.match(regEx)).values()];
   if (!allMatches) return;
   console.log(allMatches);
-  for (let i = 0; i < allMatches?.length; i++) {
-    resultText = text.replace(
-      allMatches[i],
-      `<span class="song-division">${allMatches[i]}</span>`
-    );
+  for (let i = 0; i < allMatches.length; i++) {
+    if (i === 0) {
+      resultText = text.replaceAll(
+        allMatches[i],
+        `<span class="song-division">${allMatches[i]}</span>`
+      );
+    } else {
+      resultText = resultText.replaceAll(
+        allMatches[i],
+        `<span class="song-division">${allMatches[i]}</span>`
+      );
+    }
   }
   console.log(resultText);
   return resultText;
@@ -59,8 +66,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
-      },
+        Accept: 'application/json'
+      }
     });
     if (response) {
       const data = await response.json();
@@ -79,8 +86,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
-      },
+        Accept: 'application/json'
+      }
     });
     // console.log(response);
     if (response) {
@@ -110,7 +117,7 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
   const makeMarkup = (htmlString: string): { __html: string } | undefined => {
     return htmlString
       ? {
-          __html: htmlString,
+          __html: htmlString
         }
       : undefined;
   };
@@ -135,8 +142,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
               searchTerm: prevSearchTerm,
               urls: {
                 lyrics: null,
-                songData: null,
-              },
+                songData: null
+              }
             });
           }}
         >
