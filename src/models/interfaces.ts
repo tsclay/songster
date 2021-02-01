@@ -15,3 +15,21 @@ export interface ContentState {
     songData: string | null;
   };
 }
+
+export interface SongData {
+  meta: {
+    status: number;
+  };
+  response: {
+    song: {
+      [propName: string]: any;
+    };
+  };
+}
+
+export interface LyricsProps {
+  url: string | null;
+  apiPath: string | null;
+  prevSearchTerm: string | null;
+  contentReducer: React.Dispatch<ContentAction>;
+}
