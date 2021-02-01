@@ -1,38 +1,75 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { SongData, LyricsProps } from '../../models/interfaces';
+import { SongData, LyricsProps, YouTubeLink } from '../../models/interfaces';
 
 import './Lyrics.scss';
+
+const findYouTubeLink = (dataObj: any[]): YouTubeLink | undefined => {
+  let videoLink: YouTubeLink;
+  for (let i = dataObj.length - 1; i >= 0; i--) {
+    if (
+      dataObj[i].hasOwnProperty('provider') &&
+      dataObj[i].provider === 'youtube'
+    ) {
+      videoLink = dataObj[i];
+      videoLink.url = videoLink.url.replace('watch?v=', 'embed/');
+      videoLink.url = videoLink.url.replace('http', 'https');
+      return videoLink;
+    }
+  }
+  return undefined;
+};
+
+const stylizeText = (text: string | undefined): string | undefined => {
+  if (!text) return;
+  let resultText = '';
+  console.log('input', text);
+  const regEx = new RegExp(/\[.+/, 'g');
+  const allMatches: string[] | null = text.match(regEx);
+  if (!allMatches) return;
+  console.log(allMatches);
+  for (let i = 0; i < allMatches?.length; i++) {
+    resultText = text.replace(
+      allMatches[i],
+      `<span class="song-division">${allMatches[i]}</span>`
+    );
+  }
+  console.log(resultText);
+  return resultText;
+};
 
 export const Lyrics: React.FC<LyricsProps> = (props) => {
   const { url, contentReducer, prevSearchTerm, apiPath } = props;
   const [gotLyrics, setGotLyrics] = useState(false);
   const [songMetadata, setSongMetadata] = useState<SongData | null>(null);
+  const [video, setVideo] = useState<YouTubeLink | null>(null);
   const lyricContent = useRef('');
   const aboutContent = useRef('');
+  const thisVideo = useRef<null | HTMLDivElement>(null);
   const theseLyrics = useRef<null | HTMLDivElement>(null);
   const infoDiv = useRef<null | HTMLDivElement>(null);
 
-  const fetchSongData = useCallback(
-    async (url: string | null): Promise<any> => {
-      if (!url) return;
-      const token =
-        'Kk8yGYv93-tGb_--I0iwDhMDP8VAeGrv99MyWjk5KgepAlSGPCjTLbavINlIuyO1';
-      const fullPath = `https://api.genius.com${url}/?access_token=${token}`;
-      const response = await fetch(fullPath, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          Accept: 'application/json',
-        },
-      });
-      if (response) {
-        const data = await response.json();
-        console.log(data);
-        setSongMetadata(data);
-      }
-    },
-    []
-  );
+  const fetchSongData = useCallback(async (url: string | null): Promise<
+    SongData | undefined
+  > => {
+    if (!url) return;
+    const token =
+      'Kk8yGYv93-tGb_--I0iwDhMDP8VAeGrv99MyWjk5KgepAlSGPCjTLbavINlIuyO1';
+    const fullPath = `https://api.genius.com${url}/?access_token=${token}`;
+    const response = await fetch(fullPath, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    if (response) {
+      const data = await response.json();
+      console.log(data);
+      const foundVideo = findYouTubeLink(data.response.song.media);
+      if (foundVideo) setVideo(foundVideo);
+      setSongMetadata(data);
+    }
+  }, []);
 
   const fetchLyrics = useCallback(async (url: string | null): Promise<any> => {
     if (!url) return;
@@ -57,10 +94,11 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
     if (!string) return;
     const template = document.createElement('template');
     template.innerHTML = string;
-    const foundLyrics = template.content
+    let foundLyrics = template.content
       .querySelector('.lyrics')
       ?.textContent?.trimEnd()
       .trimLeft();
+    foundLyrics = stylizeText(foundLyrics);
     const foundInfo = template.content
       .querySelector('div.rich_text_formatting')
       ?.innerHTML?.trimEnd()
@@ -116,12 +154,21 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
           >
             info
           </button>
-          <button type="button">video</button>
+          <button
+            type="button"
+            onClick={(e) => {
+              thisVideo.current?.classList.toggle('show');
+            }}
+          >
+            video
+          </button>
         </div>
       </div>
-      {gotLyrics && songMetadata ? (
+      {gotLyrics && songMetadata && video ? (
         <div className="lyrics-body">
-          <p>{songMetadata?.response.song.full_title}</p>
+          <p className="song-title dynamic-font-size">
+            {songMetadata?.response.song.full_title}
+          </p>
           <div
             ref={theseLyrics}
             className="song-lyrics dynamic-font-size"
@@ -132,6 +179,15 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
             className="song-info dynamic-font-size"
             dangerouslySetInnerHTML={makeMarkup(aboutContent.current)}
           ></div>
+          <div ref={thisVideo} className="song-video">
+            <iframe
+              title={songMetadata?.response.song.full_title}
+              src={video.url}
+              referrerPolicy="no-referrer"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen={true}
+            ></iframe>
+          </div>
         </div>
       ) : (
         <h2>Waiting...</h2>

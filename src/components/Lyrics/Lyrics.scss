@@ -23,7 +23,7 @@
     right: 0;
     transform: translate(100%, 0);
     transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
-    background: #ffffffbd;
+    background: #dbdbdb;
     width: 45%;
     height: $lyricWindowHeight;
     padding: 1.15rem;
@@ -67,6 +67,31 @@
     box-sizing: border-box;
     overflow: auto;
     height: $lyricWindowHeight;
+
+    .song-title,
+    .song-division {
+      font-weight: 700;
+    }
+
+    .song-video {
+      width: clamp(250px, 47%, 500px);
+      height: clamp(200px, 25vw, 450px);
+      z-index: 2;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      transform: translate(100%, -5%);
+      transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .song-video.show {
+      transform: translate(-10%, -5%);
+    }
   }
 
   .return-btn {
@@ -90,7 +115,7 @@
     border: 4px solid rgba(253, 234, 255, 0.6);
   }
 
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 600px) {
     .song-info {
       width: 100%;
     }

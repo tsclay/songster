@@ -33,3 +33,10 @@ export interface LyricsProps {
   prevSearchTerm: string | null;
   contentReducer: React.Dispatch<ContentAction>;
 }
+
+export interface YouTubeLink {
+  provider: string;
+  start: number;
+  type: string;
+  url: string;
+}

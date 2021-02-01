@@ -3,7 +3,7 @@ import { ContentAction } from '../../models/interfaces';
 
 import './SearchResults.scss';
 
-interface Props {
+interface SearchResultsProps {
   searchTerm: string | null;
   contentReducer: React.Dispatch<ContentAction>;
   rememberSongs: React.Dispatch<React.SetStateAction<never[]>>;
@@ -12,7 +12,7 @@ interface Props {
 
 // This component only needs the setSongs hook, not songs
 
-export const SearchResults: React.FC<Props> = (props) => {
+export const SearchResults: React.FC<SearchResultsProps> = (props) => {
   const { searchTerm, contentReducer, rememberSongs, songs } = props;
   // const [songs, setSongs] = useState([]);
 
