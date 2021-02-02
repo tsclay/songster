@@ -25,7 +25,9 @@ const stylizeText = (text: string | undefined): string | undefined => {
   console.log('input', text);
   const regEx = new RegExp(/\[.+/, 'g');
   const allMatches: string[] = [...new Set(text.match(regEx)).values()];
-  if (!allMatches) return;
+  if (allMatches.length === 0) {
+    return text;
+  }
   console.log(allMatches);
   for (let i = 0; i < allMatches.length; i++) {
     if (i === 0) {
