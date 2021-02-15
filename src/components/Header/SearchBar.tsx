@@ -85,6 +85,8 @@ export const SearchBar: React.FC<Props> = (props) => {
       <form
         id="search-genius"
         onSubmit={(e) => {
+          e.preventDefault();
+          if (!inputRef.current) return;
           handleSearch(e);
           inputElement.current?.blur();
           underline.current!.className = 'input-underline';
