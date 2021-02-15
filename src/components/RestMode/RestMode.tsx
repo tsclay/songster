@@ -12,7 +12,7 @@ export const RestMode: React.FC = () => {
         <p>
           Get started by searching for your favorite album, artist, or song!
         </p>
-        <p>
+        <p className="small-txt">
           Note: Some songs' videos won't play in this app due to copyright
           reasons. Simply click "Watch on YouTube" to watch the video on
           YouTube.
