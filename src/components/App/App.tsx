@@ -15,8 +15,8 @@ const contentReducer = (
         searchTerm: action.searchTerm,
         urls: {
           lyrics: null,
-          songData: null
-        }
+          songData: null,
+        },
       };
     case 'LYRICS':
       return {
@@ -24,8 +24,8 @@ const contentReducer = (
         searchTerm: null,
         urls: {
           lyrics: action.urls.lyrics,
-          songData: action.urls.songData
-        }
+          songData: action.urls.songData,
+        },
       };
     default:
       return {
@@ -33,8 +33,8 @@ const contentReducer = (
         searchTerm: null,
         urls: {
           lyrics: null,
-          songData: null
-        }
+          songData: null,
+        },
       };
   }
 };
@@ -44,8 +44,8 @@ const initialState: ContentState = {
   searchTerm: null,
   urls: {
     lyrics: null,
-    songData: null
-  }
+    songData: null,
+  },
 };
 
 export const App: React.FC = () => {
@@ -63,15 +63,28 @@ export const App: React.FC = () => {
       searchTerm: searchBarRef.current,
       urls: {
         lyrics: null,
-        songData: null
-      }
+        songData: null,
+      },
+    });
+  };
+
+  const renderRestMode = (e: React.SyntheticEvent): void => {
+    dispatchContentReducer({
+      type: 'REST',
+      searchTerm: searchBarRef.current,
+      urls: {
+        lyrics: null,
+        songData: null,
+      },
     });
   };
 
   return (
     <>
       <nav className="Header">
-        <h1 className="logo logo-font-clamp">Songster</h1>
+        <h1 className="logo logo-font-clamp" onClick={renderRestMode}>
+          Songster
+        </h1>
         <SearchBar inputRef={searchBarRef} handleSearch={handleSearch} />
       </nav>
       <div className="Content">
