@@ -68,9 +68,12 @@
     overflow: auto;
     height: $lyricWindowHeight;
 
-    .song-title,
-    .song-division {
+    .song-title {
       font-weight: 700;
+    }
+
+    .song-structure {
+      font-style: italic;
     }
 
     .song-video {
