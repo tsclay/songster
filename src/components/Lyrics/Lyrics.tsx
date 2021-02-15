@@ -19,7 +19,7 @@ const findYouTubeLink = (dataObj: any[]): YouTubeLink | undefined => {
   return undefined;
 };
 
-const stylizeText = (text: string | undefined): string | undefined => {
+const styleSongStructure = (text: string | undefined): string | undefined => {
   if (!text) return;
   let resultText = '';
   console.log('input', text);
@@ -33,12 +33,12 @@ const stylizeText = (text: string | undefined): string | undefined => {
     if (i === 0) {
       resultText = text.replaceAll(
         allMatches[i],
-        `<span class="song-division">${allMatches[i]}</span>`
+        `<span class="song-structure">${allMatches[i]}</span>`
       );
     } else {
       resultText = resultText.replaceAll(
         allMatches[i],
-        `<span class="song-division">${allMatches[i]}</span>`
+        `<span class="song-structure">${allMatches[i]}</span>`
       );
     }
   }
@@ -68,8 +68,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     });
     if (response) {
       const data = await response.json();
@@ -83,13 +83,13 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
   const fetchLyrics = useCallback(async (url: string | null): Promise<any> => {
     if (!url) return;
     // console.log(url);
-    const response = await fetch(`https://songster-cors.herokuapp.com/${url}`, {
-      // const response = await fetch(`http://0.0.0.0:7000/${url}`, {
+    // const response = await fetch(`https://songster-cors.herokuapp.com/${url}`, {
+    const response = await fetch(`http://0.0.0.0:7000/${url}`, {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     });
     // console.log(response);
     if (response) {
@@ -107,7 +107,7 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
       .querySelector('.lyrics')
       ?.textContent?.trimEnd()
       .trimLeft();
-    foundLyrics = stylizeText(foundLyrics);
+    foundLyrics = styleSongStructure(foundLyrics);
     const foundInfo = template.content
       .querySelector('div.rich_text_formatting')
       ?.innerHTML?.trimEnd()
@@ -119,7 +119,7 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
   const makeMarkup = (htmlString: string): { __html: string } | undefined => {
     return htmlString
       ? {
-          __html: htmlString
+          __html: htmlString,
         }
       : undefined;
   };
@@ -144,8 +144,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
               searchTerm: prevSearchTerm,
               urls: {
                 lyrics: null,
-                songData: null
-              }
+                songData: null,
+              },
             });
           }}
         >
