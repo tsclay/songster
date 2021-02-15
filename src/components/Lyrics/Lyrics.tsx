@@ -19,7 +19,7 @@ const findYouTubeLink = (dataObj: any[]): YouTubeLink | undefined => {
   return undefined;
 };
 
-const stylizeText = (text: string | undefined): string | undefined => {
+const styleSongStructure = (text: string | undefined): string | undefined => {
   if (!text) return;
   let resultText = '';
   console.log('input', text);
@@ -33,12 +33,12 @@ const stylizeText = (text: string | undefined): string | undefined => {
     if (i === 0) {
       resultText = text.replaceAll(
         allMatches[i],
-        `<span class="song-division">${allMatches[i]}</span>`
+        `<span class="song-structure">${allMatches[i]}</span>`
       );
     } else {
       resultText = resultText.replaceAll(
         allMatches[i],
-        `<span class="song-division">${allMatches[i]}</span>`
+        `<span class="song-structure">${allMatches[i]}</span>`
       );
     }
   }
@@ -68,8 +68,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     });
     if (response) {
       const data = await response.json();
@@ -88,8 +88,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     });
     // console.log(response);
     if (response) {
@@ -107,7 +107,7 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
       .querySelector('.lyrics')
       ?.textContent?.trimEnd()
       .trimLeft();
-    foundLyrics = stylizeText(foundLyrics);
+    foundLyrics = styleSongStructure(foundLyrics);
     const foundInfo = template.content
       .querySelector('div.rich_text_formatting')
       ?.innerHTML?.trimEnd()
@@ -119,7 +119,7 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
   const makeMarkup = (htmlString: string): { __html: string } | undefined => {
     return htmlString
       ? {
-          __html: htmlString
+          __html: htmlString,
         }
       : undefined;
   };
@@ -144,8 +144,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
               searchTerm: prevSearchTerm,
               urls: {
                 lyrics: null,
-                songData: null
-              }
+                songData: null,
+              },
             });
           }}
         >
@@ -173,7 +173,7 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
           </button>
         </div>
       </div>
-      {gotLyrics && songMetadata && video ? (
+      {gotLyrics && songMetadata ? (
         <div className="lyrics-body">
           <p className="song-title dynamic-font-size">
             {songMetadata?.response.song.full_title}
@@ -189,13 +189,23 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
             dangerouslySetInnerHTML={makeMarkup(aboutContent.current)}
           ></div>
           <div ref={thisVideo} className="song-video">
-            <iframe
-              title={songMetadata?.response.song.full_title}
-              src={video.url}
-              referrerPolicy="no-referrer"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen={true}
-            ></iframe>
+            {video ? (
+              <iframe
+                title={songMetadata?.response.song.full_title}
+                src={video.url}
+                referrerPolicy="no-referrer"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen={true}
+              ></iframe>
+            ) : (
+              <div className="no-video-msg">
+                <p className="emoji">😐</p>
+                <p className="msg">
+                  Looks like this song does not have a video linked to it, but
+                  you may find it on YouTube!
+                </p>
+              </div>
+            )}
           </div>
         </div>
       ) : (

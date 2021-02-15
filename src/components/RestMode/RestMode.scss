@@ -22,11 +22,20 @@
       width: 75%;
       text-align: center;
     }
+
+    p {
+      line-height: 1.5em;
+    }
   }
 
   .logo.small {
     font-size: 32px;
     display: inline;
     background: #c86fff;
+  }
+
+  .small-txt {
+    font-size: 0.75rem;
+    background: #ecd6fa;
   }
 }

@@ -12,11 +12,14 @@ export const SearchBar: React.FC<Props> = (props) => {
   const underline = useRef<HTMLDivElement>(null);
   const inputElement = useRef<HTMLInputElement>(null);
 
+  // const renders = useRef(0);
+
   useEffect(() => {
     if (inputElement && inputElement.current) {
       inputElement.current.focus();
     }
-  });
+  }, []);
+
   return (
     <div className="SearchBar">
       <input
@@ -82,7 +85,12 @@ export const SearchBar: React.FC<Props> = (props) => {
       <form
         id="search-genius"
         onSubmit={(e) => {
+          e.preventDefault();
+          if (!inputRef.current) return;
           handleSearch(e);
+          inputElement.current?.blur();
+          underline.current!.className = 'input-underline';
+          console.log(inputElement.current, underline.current);
         }}
       ></form>
     </div>
