@@ -13,8 +13,9 @@ export const RestMode: React.FC = () => {
           Get started by searching for your favorite album, artist, or song!
         </p>
         <p>
-          Note: Some songs videos won't play in this app due to copyright
-          reasons. Simply click "Play in YouTube" when this happens.
+          Note: Some songs' videos won't play in this app due to copyright
+          reasons. Simply click "Watch on YouTube" when this happens to watch
+          the video on YouTube.
         </p>
       </div>
     </div>
