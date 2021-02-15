@@ -14,8 +14,8 @@ export const RestMode: React.FC = () => {
         </p>
         <p>
           Note: Some songs' videos won't play in this app due to copyright
-          reasons. Simply click "Watch on YouTube" when this happens to watch
-          the video on YouTube.
+          reasons. Simply click "Watch on YouTube" to watch the video on
+          YouTube.
         </p>
       </div>
     </div>
