@@ -83,8 +83,8 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
   const fetchLyrics = useCallback(async (url: string | null): Promise<any> => {
     if (!url) return;
     // console.log(url);
-    // const response = await fetch(`https://songster-cors.herokuapp.com/${url}`, {
-    const response = await fetch(`http://0.0.0.0:7000/${url}`, {
+    const response = await fetch(`https://songster-cors.herokuapp.com/${url}`, {
+      // const response = await fetch(`http://0.0.0.0:7000/${url}`, {
       method: 'GET',
       mode: 'cors',
       headers: {
