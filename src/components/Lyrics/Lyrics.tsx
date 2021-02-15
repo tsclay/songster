@@ -173,7 +173,7 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
           </button>
         </div>
       </div>
-      {gotLyrics && songMetadata && video ? (
+      {gotLyrics && songMetadata ? (
         <div className="lyrics-body">
           <p className="song-title dynamic-font-size">
             {songMetadata?.response.song.full_title}
@@ -189,13 +189,23 @@ export const Lyrics: React.FC<LyricsProps> = (props) => {
             dangerouslySetInnerHTML={makeMarkup(aboutContent.current)}
           ></div>
           <div ref={thisVideo} className="song-video">
-            <iframe
-              title={songMetadata?.response.song.full_title}
-              src={video.url}
-              referrerPolicy="no-referrer"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen={true}
-            ></iframe>
+            {video ? (
+              <iframe
+                title={songMetadata?.response.song.full_title}
+                src={video.url}
+                referrerPolicy="no-referrer"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen={true}
+              ></iframe>
+            ) : (
+              <div className="no-video-msg">
+                <p className="emoji">😐</p>
+                <p className="msg">
+                  Looks like this song does not have a video linked to it, but
+                  you may find it on YouTube!
+                </p>
+              </div>
+            )}
           </div>
         </div>
       ) : (
